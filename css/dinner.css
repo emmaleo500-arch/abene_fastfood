@@ -1,0 +1,7 @@
+/* ── dinner.css ───────────────────────────────────────────────────────────── */
+.dinner-feature {
+  background: linear-gradient(135deg, #1e1b18 0%, #2a2824 100%);
+  border: 1px solid rgba(212, 163, 115, 0.4);
+}
+
+.dish-card { border: 1px solid rgba(212, 163, 115, 0.15); }

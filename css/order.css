@@ -1,0 +1,12 @@
+/* ── order.css ────────────────────────────────────────────────────────────── */
+.order-summary {
+  background: #1e1b18;
+  border-radius: 24px;
+}
+
+.order-input {
+  background: #2a2824;
+  border: 1px solid #3d3630;
+  transition: border-color 0.2s;
+}
+.order-input:focus { border-color: #d4a373; }

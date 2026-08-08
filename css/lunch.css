@@ -1,0 +1,5 @@
+/* ── lunch.css ────────────────────────────────────────────────────────────── */
+.lunch-banner {
+  background: linear-gradient(135deg, #2a2824 0%, #3d3630 100%);
+  border: 1px solid #d4a373;
+}

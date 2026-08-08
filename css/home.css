@@ -1,0 +1,3 @@
+/* ── home.css ─────────────────────────────────────────────────────────────── */
+/* Left accent stripe on every menu card */
+.dish-card { border-left: 3px solid #d4a373; }

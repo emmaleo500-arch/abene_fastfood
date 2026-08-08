@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarvoraa · Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/homepage.css">
+</head>
+<body class="home-body">
+
+  <!-- ── FULL-SCREEN HERO ────────────────────────────────────────────── -->
+  <section class="hero-section flex flex-col items-center justify-center text-center px-6">
+
+    <!-- Floating nav -->
+    <nav class="home-nav">
+      <a href="home.html" class="home-logo">Sarvoraa</a>
+      <div class="home-nav-links">
+        <a href="index.html">Menu</a>
+        <a href="lunch.html">Lunch</a>
+        <a href="dinner.html">Dinner</a>
+        <a href="about.html">About</a>
+        <a href="order.html" class="home-nav-cart">
+          Cart <span class="cart-badge" style="display:none;">0</span>
+        </a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <!-- Mobile hamburger -->
+      <button id="menu-toggle" class="home-hamburger" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile drawer -->
+    <div id="mobile-drawer" class="mobile-drawer">
+      <a href="index.html">Menu</a>
+      <a href="lunch.html">Lunch</a>
+      <a href="dinner.html">Dinner</a>
+      <a href="about.html">About</a>
+      <a href="order.html">Cart</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <!-- Hero content -->
+    <div class="hero-content">
+      <span class="hero-tag">Fresh · Local · Made to Order</span>
+      <h1 class="hero-title">
+        Taste the <span class="hero-accent">soul</span><br>of West Africa
+      </h1>
+      <p class="hero-sub">
+        Sarvoraa brings bold, authentic Ghanaian flavours straight to your table —
+        crafted daily with fresh local ingredients and a generous pour of love.
+      </p>
+      <div class="hero-ctas">
+        <a href="index.html" class="btn-primary">Explore Menu →</a>
+        <a href="order.html" class="btn-ghost">Order Now</a>
+      </div>
+    </div>
+
+    <!-- Scroll hint -->
+    <div class="scroll-hint">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ── FEATURE STRIP ──────────────────────────────────────────────── -->
+  <section class="feature-strip">
+    <div class="feature-item">
+      <span class="feature-icon"></span>
+      <div>
+        <p class="feature-title">100% Fresh</p>
+        <p class="feature-desc">Sourced daily from local farms</p>
+      </div>
+    </div>
+    <div class="feature-divider"></div>
+    <div class="feature-item">
+      <span class="feature-icon"></span>
+      <div>
+        <p class="feature-title">Fast Delivery</p>
+        <p class="feature-desc">Hot at your door in 30–45 min</p>
+      </div>
+    </div>
+    <div class="feature-divider"></div>
+    <div class="feature-item">
+      <span class="feature-icon"></span>
+      <div>
+        <p class="feature-title">Made to Order</p>
+        <p class="feature-desc">Every dish cooked fresh per order</p>
+      </div>
+    </div>
+    <div class="feature-divider"></div>
+    <div class="feature-item">
+      <span class="feature-icon"></span>
+      <div>
+        <p class="feature-title">4.9 Rating</p>
+        <p class="feature-desc">Loved by 40,000+ customers</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FEATURED DISHES ────────────────────────────────────────────── -->
+  <section class="section-wrap">
+    <div class="section-header">
+      <span class="section-label">Our Favourites</span>
+      <h2 class="section-title">Dishes everyone loves</h2>
+      <p class="section-sub">A taste of what's waiting for you — from smoky firewood jollof to rich pepper soup.</p>
+    </div>
+
+    <div class="featured-grid">
+
+      <div class="feat-card large"
+           data-dish-id="rice ball & groundnut soup"
+           data-dish-name="Rice Ball & Groundnut Soup"
+           data-dish-price="14000"
+           data-dish-image="image/Ghanaian rice balls with groundnut soup_.jpg"
+           data-dish-category="Lunch">
+        <div class="feat-img">
+          <img src="image/Ghanaian rice balls with groundnut soup_.jpg" alt="Jollof Rice">
+        </div>
+        <div class="feat-info">
+          <span class="feat-cat">Lunch</span>
+          <h3 class="feat-name">Rice Ball & Groundnut Soup</h3>
+          <p class="feat-desc">Smoky tomato rice, grilled chicken, fried plantain</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵14,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="banku-tilapia"
+           data-dish-name="Banku & Okro Stew"
+           data-dish-price="18000"
+           data-dish-image="image/Banku and Okro Stew with Tilapia.jpg"
+           data-dish-category="Dinner">
+        <div class="feat-img">
+          <img src="image/Banku and Okro Stew with Tilapia.jpg" alt="Banku & Tilapia">
+        </div>
+        <div class="feat-info">
+          <span class="feat-cat">Dinner</span>
+          <h3 class="feat-name">Banku &amp; Okro Stew</h3>
+          <p class="feat-desc">Fermented corn &amp; cassava balls, grilled tilapia, okro stew</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵18,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="waakye"
+           data-dish-name="Waakye"
+           data-dish-price="13000"
+           data-dish-image="image/Waakye.jpg"
+           data-dish-category="Lunch">
+        <div class="feat-img">
+          <img src="image/Waakye.jpg" alt="Waakye">
+        </div>
+        <div class="feat-info">
+          <span class="feat-cat">Lunch</span>
+          <h3 class="feat-name">Waakye</h3>
+          <p class="feat-desc">Rice &amp; beans cooked together, served with stew, fish &amp; spaghetti</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵13,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="kenkey-fish"
+           data-dish-name="Kenkey & Fried Fish with Papper"
+           data-dish-price="12000"
+           data-dish-image="image/Fante kenkey.jpg"
+           data-dish-category="Dinner">
+        <div class="feat-img">
+          <img src="image/Fante kenkey.jpg" alt="Fante Kenkey">
+        </div>
+        <div class="feat-info">
+          <span class="feat-cat">Dinner</span>
+          <h3 class="feat-name">Kenkey & Fried Fish with Papper</h3>
+          <p class="feat-desc">Fante-style fermented corn, fried fish &amp; pepper sauce</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵12,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="text-center mt-10">
+      <a href="index.html" class="btn-primary">View Full Menu →</a>
+    </div>
+  </section>
+
+  <!-- ── WHY US ──────────────────────────────────────────────────────── -->
+  <section class="why-section section-wrap">
+    <div class="why-grid">
+      <div class="why-text">
+        <span class="section-label">Why Sarvoraa</span>
+        <h2 class="section-title">More than just a meal</h2>
+        <p class="why-body">
+          We believe food tells a story. Every plate that leaves our kitchen carries the warmth of a Ghanaian home — cooked by chefs who grew up eating these dishes, using recipes passed down through generations.
+        </p>
+        <ul class="why-list">
+          <li><span class="why-check">✓</span> Ingredients sourced within 24 hours of harvest</li>
+          <li><span class="why-check">✓</span> Zero reheating — every order is cooked fresh</li>
+          <li><span class="why-check">✓</span> Biodegradable packaging, zero plastic</li>
+          <li><span class="why-check">✓</span> Delivery across Lagos in under 45 minutes</li>
+        </ul>
+        <a href="about.html" class="btn-ghost mt-6 inline-block">Our Story</a>
+      </div>
+      <div class="why-img-wrap">
+        <div class="why-img-circle">
+          <img src="image/This Ghanaian dish.jpg" alt="Ghanaian dish">
+        </div>
+        <div class="why-img-circle why-img-sm">
+          <img src="image/Who is ready for the food.jpg" alt="Ready to eat">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ───────────────────────────────────────────────── -->
+  <section class="section-wrap">
+    <div class="section-header">
+      <span class="section-label">What people say</span>
+      <h2 class="section-title">Customers speak for us</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">"The jollof rice tastes exactly like my grandma's — I didn't expect a takeaway to hit that close to home. 10/10 every single time."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">AK</div>
+          <div>
+            <p class="testimonial-name">Ama Kusi</p>
+            <p class="testimonial-stars"></p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Ordered Banku &amp; Tilapia for the first time and I was blown away. Arrived hot, perfectly wrapped, and tasted incredible. Sarvoraa is my go-to now."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">KO</div>
+          <div>
+            <p class="testimonial-name">Kofi Osei</p>
+            <p class="testimonial-stars"></p>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">"Catered our office lunch for 30 people. Every dish was fresh, hot, and absolutely delicious. The team was professional and on time."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">NB</div>
+          <div>
+            <p class="testimonial-name">Nana Boateng</p>
+            <p class="testimonial-stars"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FINAL CTA ───────────────────────────────────────────────────── -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Hungry right now?</h2>
+      <p class="cta-sub">Browse our full menu and get your order in. We'll have it at your door in no time.</p>
+      <div class="hero-ctas">
+        <a href="index.html" class="btn-primary">Browse Menu</a>
+        <a href="contact.html" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────────────── -->
+  <footer class="home-footer">
+    <div class="home-footer-inner">
+      <div>
+        <p class="footer-brand">Sarvoraa</p>
+        <p class="footer-tagline">Bold flavours. Fresh ingredients. Made with love.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Menu</a>
+        <a href="lunch.html">Lunch</a>
+        <a href="dinner.html">Dinner</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 Sarvoraa · All rights reserved</p>
+    </div>
+  </footer>
+
+<script src="js/app.js"></script>
+<script>
+  // Mobile nav toggle
+  const toggle = document.getElementById('menu-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  toggle.addEventListener('click', () => {
+    drawer.classList.toggle('open');
+    toggle.classList.toggle('active');
+  });
+  // Close drawer on link click
+  drawer.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      drawer.classList.remove('open');
+      toggle.classList.remove('active');
+    });
+  });
+</script>
+</body>
+</html>

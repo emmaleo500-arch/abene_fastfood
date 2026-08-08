@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarvoraa · About Us</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/homepage.css">
+</head>
+<body class="home-body">
+
+  <!-- Fixed Nav -->
+  <nav class="home-nav">
+    <a href="home.html" class="home-logo">Sarvoraa</a>
+    <div class="home-nav-links">
+      <a href="home.html">Home</a>
+      <a href="index.html">Menu</a>
+      <a href="lunch.html">Lunch</a>
+      <a href="dinner.html">Dinner</a>
+      <a href="about.html" style="color:#d4a373;">About</a>
+      <a href="order.html" style="display:inline-flex;align-items:center;gap:5px;">
+        Cart <span class="cart-badge" style="display:none;">0</span>
+      </a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button id="menu-toggle" class="home-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div id="mobile-drawer" class="mobile-drawer">
+    <a href="home.html">Home</a>
+    <a href="index.html">Menu</a>
+    <a href="lunch.html">Lunch</a>
+    <a href="dinner.html">Dinner</a>
+    <a href="about.html">About</a>
+    <a href="order.html">Cart</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Story Section -->
+  <div style="padding-top:80px;">
+    <section class="why-section section-wrap">
+      <div class="why-grid">
+        <div class="why-text">
+          <span class="section-label">Our Story</span>
+          <h1 class="section-title">Where flavour meets <span style="color:#d4a373;">tradition</span></h1>
+          <p class="why-body">
+            Sarvoraa was born in a small Lagos kitchen in 2019 — from Abena's love for bold, authentic West African cuisine. Every dish is crafted with fresh, locally sourced ingredients and a generous dash of creativity. From our kitchen to your table, we serve more than food: we serve moments.
+          </p>
+          <p class="why-body" style="margin-top:-.5rem;">
+            We work directly with local farmers in Ogun and Lagos State, ensuring every vegetable, pepper, and grain reaches you within 24 hours of harvest. No shortcuts. No compromise.
+          </p>
+          <ul class="why-list" style="margin-top:1rem;">
+            <li><span class="why-check">✓</span> 100% Fresh ingredients</li>
+            <li><span class="why-check">✓</span>  Local produce only</li>
+            <li><span class="why-check">✓</span>  Every dish made to order</li>
+            <li><span class="why-check">✓</span>  Fast delivery, always hot</li>
+          </ul>
+        </div>
+        <div class="why-img-wrap">
+          <div class="why-img-circle">
+            <img src="image/This Ghanaian dish.jpg" alt="Sarvoraa Kitchen">
+          </div>
+          <div class="why-img-circle why-img-sm">
+            <img src="image/Who is ready for the food.jpg" alt="Ready to eat">
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Stats -->
+  <section class="section-wrap" style="padding-top:0;">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1.25rem;">
+      <div class="testimonial-card" style="text-align:center;">
+        <p style="font-size:2rem;font-weight:900;color:#d4a373;">7+</p>
+        <p style="color:#8a8078;font-size:.85rem;margin-top:.35rem;">Years serving</p>
+      </div>
+      <div class="testimonial-card" style="text-align:center;">
+        <p style="font-size:2rem;font-weight:900;color:#d4a373;">40k+</p>
+        <p style="color:#8a8078;font-size:.85rem;margin-top:.35rem;">Happy customers</p>
+      </div>
+      <div class="testimonial-card" style="text-align:center;">
+        <p style="font-size:2rem;font-weight:900;color:#d4a373;">25</p>
+        <p style="color:#8a8078;font-size:.85rem;margin-top:.35rem;">Signature dishes</p>
+      </div>
+      <div class="testimonial-card" style="text-align:center;">
+        <p style="font-size:2rem;font-weight:900;color:#d4a373;">4.9 </p>
+        <p style="color:#8a8078;font-size:.85rem;margin-top:.35rem;">Average rating</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team -->
+  <section class="section-wrap" style="padding-top:1rem;">
+    <div class="section-header">
+      <span class="section-label">The People</span>
+      <h2 class="section-title">Meet the team</h2>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;">
+
+      <div class="testimonial-card" style="align-items:center;text-align:center;">
+        <div class="why-img-circle" style="width:90px;height:90px;position:static;margin:0 auto .75rem;">
+          <img src="image/download.jpg" alt="Abena">
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:#f0ece6;">Abena Owusu</h3>
+        <p style="color:#d4a373;font-size:.8rem;font-weight:600;margin-top:.2rem;">Founder &amp; Head Chef</p>
+        <p style="color:#8a8078;font-size:.8rem;margin-top:.5rem;line-height:1.6;">Trained in Accra and Lagos, Abena brings 15 years of culinary mastery to every plate.</p>
+      </div>
+
+      <div class="testimonial-card" style="align-items:center;text-align:center;">
+        <div class="why-img-circle" style="width:90px;height:90px;position:static;margin:0 auto .75rem;">
+          <img src="image/download (1).jpg" alt="Kofi">
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:#f0ece6;">Kofi Mensah</h3>
+        <p style="color:#d4a373;font-size:.8rem;font-weight:600;margin-top:.2rem;">Sous Chef</p>
+        <p style="color:#8a8078;font-size:.8rem;margin-top:.5rem;line-height:1.6;">Kofi's speciality is West African fusion — he turns traditional recipes into modern masterpieces.</p>
+      </div>
+
+      <div class="testimonial-card" style="align-items:center;text-align:center;">
+        <div class="why-img-circle" style="width:90px;height:90px;position:static;margin:0 auto .75rem;">
+          <img src="image/download (2).jpg" alt="Ngozi">
+        </div>
+        <h3 style="font-weight:800;font-size:1rem;color:#f0ece6;">Ngozi Adeyemi</h3>
+        <p style="color:#d4a373;font-size:.8rem;font-weight:600;margin-top:.2rem;">Operations Manager</p>
+        <p style="color:#8a8078;font-size:.8rem;margin-top:.5rem;line-height:1.6;">Ngozi keeps every order on time, every ingredient fresh, and every customer smiling.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Values -->
+  <section class="section-wrap" style="padding-top:1rem;">
+    <div style="background:rgba(30,27,24,0.75);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.1);
+                border-radius:28px;padding:3rem 2rem;">
+      <div class="section-header" style="margin-bottom:2rem;">
+        <span class="section-label">Our Values</span>
+        <h2 class="section-title">What we stand for</h2>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;text-align:center;">
+        <div>
+          <span style="font-size:2.5rem;"></span>
+          <h3 style="font-weight:700;color:#d4a373;margin-top:.75rem;">Community First</h3>
+          <p style="color:#8a8078;font-size:.85rem;margin-top:.5rem;line-height:1.6;">We source locally and employ from the community. Every cedi you spend stays home.</p>
+        </div>
+        <div>
+          <span style="font-size:2.5rem;"></span>
+          <h3 style="font-weight:700;color:#d4a373;margin-top:.75rem;">Sustainable Packaging</h3>
+          <p style="color:#8a8078;font-size:.85rem;margin-top:.5rem;line-height:1.6;">All packaging is biodegradable. We're committed to zero plastic waste by 2027.</p>
+        </div>
+        <div>
+          <span style="font-size:2.5rem;"></span>
+          <h3 style="font-weight:700;color:#d4a373;margin-top:.75rem;">Made with Love</h3>
+          <p style="color:#8a8078;font-size:.85rem;margin-top:.5rem;line-height:1.6;">Every dish is cooked fresh per order — we never reheat, we never compromise.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <div class="cta-inner">
+      <h2 class="cta-title">Come eat with us</h2>
+      <p class="cta-sub">Explore our menu, place an order, or just say hello — we'd love to hear from you.</p>
+      <div class="hero-ctas">
+        <a href="index.html" class="btn-primary">Browse Menu →</a>
+        <a href="contact.html" class="btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="home-footer">
+    <div class="home-footer-inner">
+      <div>
+        <p class="footer-brand">Sarvoraa</p>
+        <p class="footer-tagline">Bold flavours. Fresh ingredients. Made with love.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Menu</a>
+        <a href="lunch.html">Lunch</a>
+        <a href="dinner.html">Dinner</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 Sarvoraa · All rights reserved</p>
+    </div>
+  </footer>
+
+<script src="js/app.js"></script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  toggle.addEventListener('click', () => { drawer.classList.toggle('open'); toggle.classList.toggle('active'); });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawer.classList.remove('open'); toggle.classList.remove('active'); }));
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+/* ── about.css ────────────────────────────────────────────────────────────── */
+.about-quote {
+  border-left: 4px solid #d4a373;
+  padding-left: 1rem;
+  font-style: italic;
+}
+
+.pill {
+  background: #2a2824;
+  color: #f0ece6;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 60px;
+  display: inline-block;
+  border: 1px solid #3d3630;
+}
+
+.stat-card {
+  background: #2a2824;
+  border: 1px solid #3d3630;
+}
+
+.team-card {
+  background: #2a2824;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.team-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.5);
+}

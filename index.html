@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sarvoraa · Full Menu</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/homepage.css">
+</head>
+<body class="home-body">
+
+  <!-- Fixed Nav -->
+  <nav class="home-nav">
+    <a href="home.html" class="home-logo">Sarvoraa</a>
+    <div class="home-nav-links">
+      <a href="home.html">Home</a>
+      <a href="index.html" style="color:#d4a373;">Menu</a>
+      <a href="lunch.html">Lunch</a>
+      <a href="dinner.html">Dinner</a>
+      <a href="about.html">About</a>
+      <a href="order.html" style="display:inline-flex;align-items:center;gap:5px;">
+        Cart <span class="cart-badge" style="display:none;">0</span>
+      </a>
+      <a href="contact.html">Contact</a>
+    </div>
+    <button id="menu-toggle" class="home-hamburger" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <div id="mobile-drawer" class="mobile-drawer">
+    <a href="home.html">Home</a>
+    <a href="index.html">Menu</a>
+    <a href="lunch.html">Lunch</a>
+    <a href="dinner.html">Dinner</a>
+    <a href="about.html">About</a>
+    <a href="order.html">Cart</a>
+    <a href="contact.html">Contact</a>
+  </div>
+
+  <!-- Page Header -->
+  <div style="padding-top:80px;">
+    <div class="section-wrap" style="padding-bottom:1rem;">
+      <div class="section-header" style="margin-bottom:1.5rem;">
+        <span class="section-label">Sarvoraa Kitchen</span>
+        <h1 class="section-title">Our Full Menu</h1>
+        <p class="section-sub">Fresh ingredients · Made to order · Delivered hot</p>
+      </div>
+
+      <!-- Search + Filters row -->
+      <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1rem;">
+        <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+          <button data-filter="all"       class="filter-tab filter-active">All</button>
+          <button data-filter="breakfast" class="filter-tab">Breakfast</button>
+          <button data-filter="lunch"     class="filter-tab">Lunch</button>
+          <button data-filter="dinner"    class="filter-tab">Dinner</button>
+          <button data-filter="snack"     class="filter-tab">Snacks</button>
+        </div>
+        <div style="position:relative;">
+          <span style="position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#8a8078;">🔍</span>
+          <input id="menu-search" type="text" placeholder="Search dishes…"
+            style="padding:10px 16px 10px 40px;border-radius:60px;background:rgba(30,27,24,0.8);
+                   color:#f0ece6;border:1px solid rgba(255,255,255,0.15);outline:none;
+                   font-size:.85rem;width:220px;backdrop-filter:blur(8px);" />
+        </div>
+      </div>
+      <p style="font-size:.75rem;color:#8a8078;margin-bottom:2rem;"><span id="result-count"></span></p>
+    </div>
+  </div>
+
+  <!-- Dish Grid -->
+  <div class="section-wrap" style="padding-top:0;">
+    <div id="dish-grid" class="featured-grid" style="grid-template-columns:repeat(3,1fr);grid-template-rows:unset;">
+
+      <div class="feat-card"
+           data-dish-id="bread-toast" data-dish-name="Waakye & Supagitte"
+           data-dish-price="10000" data-dish-image="image/download.jpg" data-dish-category="Breakfast">
+        <div class="feat-img"><img src="image/download.jpg" alt="Bread Toast"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Breakfast</span>
+          <h3 class="feat-name">Waakye & Meat and Eggs</h3>
+          <p class="feat-desc">Golden toast, fried egg, avocado, cherry tomatoes</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵10,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="fried-rice" data-dish-name="Waakye & Supagitte"
+           data-dish-price="17000" data-dish-image="image/Waakye.jpg" data-dish-category="Lunch">
+        <div class="feat-img"><img src="image/Waakye.jpg" alt="Fried Rice"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Lunch</span>
+          <h3 class="feat-name">Waakye & Supagitte</h3>
+          <p class="feat-desc">Flavoured rice, grilled chicken, fresh pepper &amp; veg</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵17,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="jollof-rice" data-dish-name="Rice Ball & Groundnut Soup"
+           data-dish-price="14000" data-dish-image="image/Ghanaian rice balls with groundnut soup_.jpg" data-dish-category="Lunch">
+        <div class="feat-img"><img src="image/Ghanaian rice balls with groundnut soup_.jpg" alt="Jollof Rice"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Lunch</span>
+          <h3 class="feat-name">Rice Ball & Groundnut Soup</h3>
+          <p class="feat-desc">Boilded rice, grilled chicken and groundnut soup</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵14,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="yam-egg" data-dish-name="Kenkey & Fried Fish"
+           data-dish-price="15000" data-dish-image="image/Fante kenkey.jpg" data-dish-category="Breakfast">
+        <div class="feat-img"><img src="image/Fante kenkey.jpg" alt="Yam & Egg Sauce"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Breakfast</span>
+          <h3 class="feat-name">Kenkey &amp; Fried Fish </h3>
+          <p class="feat-desc">Soft boiled yam, scrambled eggs, fresh peppers &amp; onions</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵15,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="fish-noodles" data-dish-name="Banku & OkroStew with Tillapia"
+           data-dish-price="15000" data-dish-image="image/Banku and Okro Stew with Tilapia.jpg" data-dish-category="Dinner">
+        <div class="feat-img"><img src="image/Banku and Okro Stew with Tilapia.jpg" alt="Fish Noodles"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Dinner</span>
+          <h3 class="feat-name">Banku & Okra Stew with Tillapia</h3>
+          <p class="feat-desc">Stir-fried noodles, crispy tilapia, boiled egg, spring onion</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵15,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="noodles-plantain" data-dish-name="Noodles & Fried Eggs"
+           data-dish-price="15000" data-dish-image="image/Dinner is ready.jpg" data-dish-category="Dinner">
+        <div class="feat-img"><img src="image/Dinner is ready.jpg" alt="Noodles & Plantain"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Dinner</span>
+          <h3 class="feat-name">Noodles &amp; Fried Eggs</h3>
+          <p class="feat-desc">Stir-fried noodles, crispy fish, fried plantain, boiled egg</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵15,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="puff-puff" data-dish-name="Plantain & Stew"
+           data-dish-price="5000" data-dish-image="image/This Ghanaian dish.jpg" data-dish-category="Snack">
+        <div class="feat-img"><img src="image/This Ghanaian dish.jpg" alt="Puff Puff"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Snack</span>
+          <h3 class="feat-name">Plantain & Stew</h3>
+          <p class="feat-desc">Deep-fried dough balls, lightly sweetened, served warm</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵5,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="suya-wrap" data-dish-name="Banku & Groundnut Soup"
+           data-dish-price="12000" data-dish-image="image/download (1).jpg" data-dish-category="Snack">
+        <div class="feat-img"><img src="image/download (1).jpg" alt="Suya Wrap"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Snack</span>
+          <h3 class="feat-name">Banku & Groundnut Soup</h3>
+          <p class="feat-desc">Spiced beef suya, onions, tomato, folded in soft flatbread</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵12,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="feat-card"
+           data-dish-id="egusi-soup" data-dish-name="Indome &  Vegetable mix with cream"
+           data-dish-price="18000" data-dish-image="image/download (2).jpg" data-dish-category="Dinner">
+        <div class="feat-img"><img src="image/download (2).jpg" alt="Egusi Soup"></div>
+        <div class="feat-info">
+          <span class="feat-cat">Dinner</span>
+          <h3 class="feat-name">Indome &amp; Vegetable mix with cream</h3>
+          <p class="feat-desc">Rich melon seed soup, assorted meat, served with pounded yam</p>
+          <div class="feat-footer">
+            <span class="feat-price">₵18,000</span>
+            <button data-add-cart class="btn-primary-sm">Add to cart</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /dish-grid -->
+
+    <!-- CTA -->
+    <div class="cta-section" style="padding:3rem 0 2rem;">
+      <div class="cta-inner">
+        <h2 class="cta-title">Ready to order?</h2>
+        <p class="cta-sub">Everything is cooked fresh the moment you order. View your cart and we'll get started.</p>
+        <div class="hero-ctas">
+          <a href="order.html" class="btn-primary">View Cart</a>
+          <a href="home.html" class="btn-ghost">Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="home-footer">
+    <div class="home-footer-inner">
+      <div>
+        <p class="footer-brand">Sarvoraa</p>
+        <p class="footer-tagline">Bold flavours. Fresh ingredients. Made with love.</p>
+      </div>
+      <div class="footer-links">
+        <a href="index.html">Menu</a>
+        <a href="lunch.html">Lunch</a>
+        <a href="dinner.html">Dinner</a>
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <p class="footer-copy">© 2026 Sarvoraa · All rights reserved</p>
+    </div>
+  </footer>
+
+<script src="js/app.js"></script>
+<script src="js/menu.js"></script>
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const drawer = document.getElementById('mobile-drawer');
+  toggle.addEventListener('click', () => { drawer.classList.toggle('open'); toggle.classList.toggle('active'); });
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawer.classList.remove('open'); toggle.classList.remove('active'); }));
+</script>
+</body>
+</html>

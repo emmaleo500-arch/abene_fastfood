@@ -1,0 +1,184 @@
+/* ── GLOBAL ───────────────────────────────────────────────────────────────── */
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: #121212 url('../image/background.jpg') center center / cover fixed no-repeat;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #f0ece6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+/* ── Card shell ─────────────────────────────────────────────────────────── */
+.organic-card {
+  background: rgba(247, 245, 240, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 48px;
+  box-shadow: 0 24px 48px rgba(0,0,0,0.45);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #1e1b18;
+}
+@media (max-width: 640px) {
+  .organic-card { border-radius: 28px; }
+}
+
+/* ── Nav ────────────────────────────────────────────────────────────────── */
+.nav-link {
+  color: #7a746c;
+  transition: color 0.2s;
+  text-decoration: none;
+  position: relative;
+}
+.nav-link:hover { color: #1e1b18; }
+.nav-link.active {
+  color: #1e1b18;
+  font-weight: 600;
+}
+.nav-link.active::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0; bottom: -4px;
+  height: 2px;
+  background: #d4a373;
+  border-radius: 2px;
+}
+
+/* Cart nav link */
+.cart-nav-link { display: inline-flex; align-items: center; gap: 6px; }
+
+/* ── Cart badge ─────────────────────────────────────────────────────────── */
+.cart-badge {
+  background: #d4a373;
+  color: #121212;
+  font-size: 0.65rem;
+  font-weight: 700;
+  min-width: 18px;
+  height: 18px;
+  border-radius: 50px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  line-height: 1;
+}
+@keyframes badgePop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.5); }
+  100% { transform: scale(1); }
+}
+.cart-badge.badge-pulse { animation: badgePop 0.35s ease; }
+
+/* ── Dish card ──────────────────────────────────────────────────────────── */
+.dish-card {
+  background: #2a2824;
+  border-radius: 28px;
+  transition: transform 0.25s, box-shadow 0.25s;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+}
+.dish-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 32px rgba(0,0,0,0.65);
+}
+
+/* ── Buttons ────────────────────────────────────────────────────────────── */
+.btn-order {
+  background: #d4a373;
+  color: #121212;
+  font-weight: 700;
+  padding: 12px 28px;
+  border-radius: 60px;
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 6px 16px rgba(212,163,115,0.35);
+  font-size: 0.875rem;
+}
+.btn-order:hover {
+  background: #e0b68b;
+  transform: scale(1.03);
+  box-shadow: 0 10px 24px rgba(212,163,115,0.45);
+}
+.btn-order:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ── Circle image ───────────────────────────────────────────────────────── */
+.hero-circle-sm {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  background: #2d2a24;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.55);
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.hero-circle-sm img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ── Filter tabs (menu page) ────────────────────────────────────────────── */
+.filter-tab {
+  background: #2a2824;
+  color: #8a8078;
+  border: 1px solid #3d3630;
+  border-radius: 60px;
+  padding: 7px 18px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-transform: capitalize;
+}
+.filter-tab:hover { color: #f0ece6; border-color: #d4a373; }
+.filter-tab.filter-active {
+  background: #d4a373;
+  color: #121212;
+  border-color: #d4a373;
+}
+
+/* ── Tags (dish cards) ──────────────────────────────────────────────────── */
+.tag {
+  background: #3d3630;
+  color: #cbc2b8;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 50px;
+  display: inline-block;
+}
+.tag-dark {
+  background: #1e1b18;
+  color: #cbc2b8;
+  font-size: 0.65rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 50px;
+  display: inline-block;
+}
+
+/* ── Qty buttons (order page) ───────────────────────────────────────────── */
+.qty-btn {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #3d3630;
+  color: #f0ece6;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  flex-shrink: 0;
+}
+.qty-btn:hover { background: #d4a373; color: #121212; }

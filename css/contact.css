@@ -1,0 +1,51 @@
+/* ── contact.css ──────────────────────────────────────────────────────────── */
+.contact-form-card {
+  background: #2a2824;
+  border: 1px solid #3d3630;
+}
+
+.contact-input {
+  background: #1e1b18;
+  border: 1px solid #3d3630;
+  transition: border-color 0.2s;
+}
+.contact-input:focus { border-color: #d4a373; }
+
+.contact-info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.contact-icon {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.social-btn {
+  background: #2a2824;
+  color: #f0ece6;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 60px;
+  text-decoration: none;
+  border: 1px solid #3d3630;
+  transition: border-color 0.2s, color 0.2s;
+  display: inline-block;
+}
+.social-btn:hover { border-color: #d4a373; color: #d4a373; }
+
+.map-placeholder {
+  background: #2a2824;
+  height: 160px;
+  border: 1px solid #3d3630;
+}
+
+.faq-card {
+  background: #2a2824;
+  border: 1px solid #3d3630;
+  transition: border-color 0.2s;
+}
+.faq-card:hover { border-color: #d4a373; }
