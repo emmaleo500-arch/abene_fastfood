@@ -212,6 +212,48 @@
   const drawer = document.getElementById('mobile-drawer');
   toggle.addEventListener('click', () => { drawer.classList.toggle('open'); toggle.classList.toggle('active'); });
   drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { drawer.classList.remove('open'); toggle.classList.remove('active'); }));
+
+  // ── Contact form → POST /api/contact ──────────────────────────────────────
+  document.getElementById('contact-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const form    = e.target;
+    const btn     = form.querySelector('button[type="submit"]');
+    const name    = form.querySelector('[name="cname"]').value.trim();
+    const email   = form.querySelector('[name="cemail"]').value.trim();
+    const subject = form.querySelector('[name="csubject"]').value;
+    const message = form.querySelector('[name="cmessage"]').value.trim();
+
+    // Basic client-side checks
+    if (!name)                              return showToast('Please enter your name.', 'error');
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('Enter a valid email address.', 'error');
+    if (message.length < 10)               return showToast('Message is too short (min 10 chars).', 'error');
+
+    btn.disabled    = true;
+    btn.textContent = 'Sending…';
+
+    try {
+      const res  = await fetch('http://localhost:5000/api/contact', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name, email, subject, message }),
+      });
+      const data = await res.json();
+
+      if (data.success) {
+        showToast("Message sent! We'll reply within 24 hours ✉️");
+        form.reset();
+      } else {
+        // Show the first validation error returned by the server, or generic message
+        const firstError = data.errors?.[0]?.msg || data.message || 'Something went wrong.';
+        showToast(firstError, 'error');
+      }
+    } catch {
+      showToast('Could not reach server — check your connection.', 'error');
+    } finally {
+      btn.disabled    = false;
+      btn.textContent = 'Send message';
+    }
+  });
 </script>
 </body>
 </html>

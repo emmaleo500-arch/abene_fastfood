@@ -1,0 +1,12 @@
+# ── Node ─────────────────────────────────────────────────────────────────────
+backend/node_modules/
+node_modules/
+
+# ── Environment secrets (NEVER commit these) ─────────────────────────────────
+backend/.env
+.env
+
+# ── OS / editor ──────────────────────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+.vscode/

@@ -205,14 +205,38 @@
 
       const btn = document.getElementById('place-order-btn');
       btn.disabled = true; btn.textContent = 'Placing order…';
-      setTimeout(() => {
-        clearCart(); renderCart();
-        showToast("Order placed! We'll call you to confirm 🎉");
+
+      const cart     = getCart();
+      const subtotal = cartTotal();
+      fetch('http://localhost:5000/api/orders', {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          customerName:    name,
+          customerPhone:   phone,
+          deliveryAddress: address,
+          items:           cart,
+          subtotal:        subtotal,
+          deliveryFee:     2000,
+          total:           subtotal + 2000,
+        }),
+      })
+      .then(r => r.json())
+      .then(data => {
+        if (data.success) {
+          clearCart(); renderCart();
+          showToast("Order placed! We'll call you to confirm 🎉");
+        } else {
+          showToast(data.message || 'Order failed — try again.', 'error');
+        }
+      })
+      .catch(() => showToast('Could not reach server — check your connection.', 'error'))
+      .finally(() => {
         btn.disabled = false; btn.textContent = 'Place Order →';
-        document.getElementById('del-name').value = '';
-        document.getElementById('del-phone').value = '';
+        document.getElementById('del-name').value    = '';
+        document.getElementById('del-phone').value   = '';
         document.getElementById('del-address').value = '';
-      }, 1500);
+      });
     });
   });
 </script>

@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Sarvoraa · Admin</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background:#0e0c0a; color:#f0ece6; font-family:system-ui,sans-serif; }
+    .sidebar { width:240px; min-height:100vh; background:#1a1714;
+               border-right:1px solid rgba(255,255,255,.08); flex-shrink:0; }
+    .nav-item { display:flex; align-items:center; gap:10px; padding:11px 20px;
+                color:#8a8078; font-size:.85rem; font-weight:600; cursor:pointer;
+                border-radius:10px; margin:2px 8px; transition:.15s; text-decoration:none; }
+    .nav-item:hover,.nav-item.active { background:rgba(212,163,115,.15); color:#d4a373; }
+    .card { background:#1e1b18; border:1px solid rgba(255,255,255,.08);
+            border-radius:20px; padding:1.5rem; }
+    .badge { font-size:.7rem; font-weight:700; padding:3px 10px; border-radius:50px; }
+    .badge-pending   { background:rgba(251,191,36,.2);  color:#fbbf24; }
+    .badge-confirmed { background:rgba(96,165,250,.2);  color:#60a5fa; }
+    .badge-preparing { background:rgba(167,139,250,.2); color:#a78bfa; }
+    .badge-out_for_delivery { background:rgba(52,211,153,.2); color:#34d399; }
+    .badge-delivered { background:rgba(74,222,128,.2);  color:#4ade80; }
+    .badge-cancelled { background:rgba(248,113,113,.2); color:#f87171; }
+    .btn { padding:8px 20px; border-radius:60px; font-weight:700; font-size:.8rem;
+           cursor:pointer; border:none; transition:.15s; }
+    .btn-primary { background:#d4a373; color:#121212; }
+    .btn-primary:hover { background:#e0b68b; }
+    .btn-ghost  { background:transparent; color:#d4a373;
+                  border:1px solid rgba(212,163,115,.4); }
+    .btn-ghost:hover { background:rgba(212,163,115,.1); }
+    .btn-danger { background:rgba(248,113,113,.15); color:#f87171;
+                  border:1px solid rgba(248,113,113,.3); }
+    .btn-danger:hover { background:rgba(248,113,113,.3); }
+    .tab { display:none; }
+    .tab.active { display:block; }
+    input,select,textarea {
+      background:#2a2824; border:1px solid rgba(255,255,255,.12);
+      border-radius:10px; padding:10px 14px; color:#f0ece6;
+      font-size:.85rem; outline:none; width:100%; }
+    input:focus,select:focus,textarea:focus { border-color:#d4a373; }
+    table { width:100%; border-collapse:collapse; }
+    th { text-align:left; font-size:.72rem; text-transform:uppercase;
+         letter-spacing:.1em; color:#8a8078; padding:10px 12px; }
+    td { padding:10px 12px; font-size:.85rem; border-top:1px solid rgba(255,255,255,.06); }
+    tr:hover td { background:rgba(255,255,255,.03); }
+    #login-screen { position:fixed; inset:0; background:#0e0c0a;
+                    display:flex; align-items:center; justify-content:center; z-index:100; }
+  </style>
+</head>
+<body>
+
+<!-- ── LOGIN SCREEN ─────────────────────────────────────────── -->
+<div id="login-screen">
+  <div class="card" style="width:100%;max-width:400px;">
+    <div style="text-align:center;margin-bottom:1.5rem;">
+      <p style="font-size:1.6rem;font-weight:900;color:#d4a373;">Sarvoraa</p>
+      <p style="color:#8a8078;font-size:.85rem;">Admin Dashboard</p>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:.75rem;">
+      <input id="login-email" type="email" placeholder="Admin email"/>
+      <input id="login-password" type="password" placeholder="Password"/>
+      <button class="btn btn-primary" style="width:100%;padding:12px;" onclick="login()">
+        Sign in →
+      </button>
+      <p id="login-error" style="color:#f87171;font-size:.8rem;text-align:center;"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── MAIN APP ──────────────────────────────────────────────── -->
+<div id="app" style="display:none;flex-direction:row;min-height:100vh;">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" style="position:sticky;top:0;display:flex;flex-direction:column;padding:1.5rem 0;">
+    <div style="padding:0 20px 1.5rem;">
+      <p style="font-size:1.3rem;font-weight:900;color:#d4a373;">Sarvoraa</p>
+      <p style="color:#8a8078;font-size:.72rem;">Admin Panel</p>
+    </div>
+    <nav style="flex:1;">
+      <a class="nav-item active" onclick="showTab('dashboard',this)">📊 Dashboard</a>
+      <a class="nav-item" onclick="showTab('orders',this)">🛒 Orders
+        <span id="pending-count" class="badge badge-pending" style="margin-left:auto;display:none;"></span>
+      </a>
+      <a class="nav-item" onclick="showTab('messages',this)">✉️ Messages
+        <span id="unread-count" class="badge badge-pending" style="margin-left:auto;display:none;"></span>
+      </a>
+    </nav>
+    <div style="padding:0 12px;">
+      <button class="btn btn-ghost" style="width:100%;" onclick="logout()">Sign out</button>
+    </div>
+  </aside>
+
+  <!-- Content -->
+  <main style="flex:1;padding:2rem;overflow-y:auto;max-height:100vh;">
+
+    <!-- DASHBOARD TAB -->
+    <div id="tab-dashboard" class="tab active">
+      <h1 style="font-size:1.6rem;font-weight:900;margin-bottom:1.5rem;">Dashboard</h1>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:1rem;margin-bottom:2rem;">
+        <div class="card" style="text-align:center;">
+          <p style="font-size:1.8rem;font-weight:900;color:#d4a373;" id="stat-total">—</p>
+          <p style="color:#8a8078;font-size:.8rem;margin-top:.35rem;">Total Orders</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:1.8rem;font-weight:900;color:#fbbf24;" id="stat-pending">—</p>
+          <p style="color:#8a8078;font-size:.8rem;margin-top:.35rem;">Pending</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:1.8rem;font-weight:900;color:#4ade80;" id="stat-delivered">—</p>
+          <p style="color:#8a8078;font-size:.8rem;margin-top:.35rem;">Delivered</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:1.8rem;font-weight:900;color:#d4a373;" id="stat-revenue">—</p>
+          <p style="color:#8a8078;font-size:.8rem;margin-top:.35rem;">Revenue</p>
+        </div>
+        <div class="card" style="text-align:center;">
+          <p style="font-size:1.8rem;font-weight:900;color:#60a5fa;" id="stat-messages">—</p>
+          <p style="color:#8a8078;font-size:.8rem;margin-top:.35rem;">Unread Msgs</p>
+        </div>
+      </div>
+      <h2 style="font-size:1rem;font-weight:700;margin-bottom:.75rem;">Recent Orders</h2>
+      <div class="card" style="overflow-x:auto;">
+        <table><thead><tr>
+          <th>Order #</th><th>Customer</th><th>Total</th><th>Status</th><th>Date</th>
+        </tr></thead>
+        <tbody id="recent-orders-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ORDERS TAB -->
+    <div id="tab-orders" class="tab">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+        <h1 style="font-size:1.6rem;font-weight:900;">Orders</h1>
+        <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+          <select id="order-filter" onchange="loadOrders()" style="width:auto;padding:8px 14px;border-radius:60px;">
+            <option value="">All statuses</option>
+            <option value="pending">Pending</option>
+            <option value="confirmed">Confirmed</option>
+            <option value="preparing">Preparing</option>
+            <option value="out_for_delivery">Out for delivery</option>
+            <option value="delivered">Delivered</option>
+            <option value="cancelled">Cancelled</option>
+          </select>
+          <button class="btn btn-primary" onclick="loadOrders()">↺ Refresh</button>
+        </div>
+      </div>
+      <div class="card" style="overflow-x:auto;">
+        <table><thead><tr>
+          <th>Order #</th><th>Customer</th><th>Phone</th><th>Items</th>
+          <th>Total</th><th>Status</th><th>Date</th><th>Actions</th>
+        </tr></thead>
+        <tbody id="orders-body"></tbody>
+        </table>
+        <p id="orders-empty" style="text-align:center;color:#8a8078;padding:2rem;display:none;">No orders found.</p>
+      </div>
+    </div>
+
+    <!-- MESSAGES TAB -->
+    <div id="tab-messages" class="tab">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:1.5rem;">
+        <h1 style="font-size:1.6rem;font-weight:900;">Messages</h1>
+        <button class="btn btn-primary" onclick="loadMessages()">↺ Refresh</button>
+      </div>
+      <div id="messages-list" style="display:flex;flex-direction:column;gap:.75rem;"></div>
+      <p id="messages-empty" style="text-align:center;color:#8a8078;padding:2rem;display:none;">No messages.</p>
+    </div>
+
+  </main>
+</div>
+
+<!-- Order detail modal -->
+<div id="order-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);
+     z-index:200;align-items:center;justify-content:center;">
+  <div class="card" style="max-width:520px;width:92%;max-height:90vh;overflow-y:auto;position:relative;">
+    <button onclick="closeModal()" style="position:absolute;top:12px;right:14px;background:none;
+            border:none;color:#8a8078;font-size:1.3rem;cursor:pointer;">✕</button>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+const API = 'http://localhost:5000/api';
+let TOKEN = localStorage.getItem('sarvoraa_admin_token') || '';
+
+// ── Auth ──────────────────────────────────────────────────────────────────────
+async function login() {
+  const email    = document.getElementById('login-email').value.trim();
+  const password = document.getElementById('login-password').value;
+  const errEl    = document.getElementById('login-error');
+  errEl.textContent = '';
+  try {
+    const res  = await fetch(`${API}/auth/login`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ email, password })
+    });
+    const data = await res.json();
+    if (!data.success) { errEl.textContent = data.message || 'Invalid credentials'; return; }
+    TOKEN = data.token;
+    localStorage.setItem('sarvoraa_admin_token', TOKEN);
+    showApp();
+  } catch { errEl.textContent = 'Server unreachable — is the backend running?'; }
+}
+
+function logout() {
+  localStorage.removeItem('sarvoraa_admin_token');
+  TOKEN = '';
+  document.getElementById('app').style.display = 'none';
+  document.getElementById('login-screen').style.display = 'flex';
+}
+
+async function checkAuth() {
+  if (!TOKEN) return;
+  try {
+    const res = await fetch(`${API}/auth/me`, { headers: { Authorization:`Bearer ${TOKEN}` } });
+    if (res.ok) showApp();
+    else { localStorage.removeItem('sarvoraa_admin_token'); TOKEN = ''; }
+  } catch { /* server offline — show login */ }
+}
+
+function showApp() {
+  document.getElementById('login-screen').style.display = 'none';
+  document.getElementById('app').style.display = 'flex';
+  loadStats();
+  loadOrders();
+  loadMessages();
+  // Auto-refresh every 30 seconds
+  setInterval(() => { loadStats(); loadOrders(); loadMessages(); }, 30000);
+}
+
+// ── Tabs ──────────────────────────────────────────────────────────────────────
+function showTab(name, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById(`tab-${name}`).classList.add('active');
+  el.classList.add('active');
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+const fmt = n => '₵' + Number(n).toLocaleString('en-GH');
+const fmtDate = d => new Date(d).toLocaleString('en-GB', { dateStyle:'medium', timeStyle:'short' });
+
+function statusBadge(s) {
+  return `<span class="badge badge-${s}">${s.replace(/_/g,' ')}</span>`;
+}
+
+async function apiFetch(path, opts = {}) {
+  return fetch(`${API}${path}`, {
+    ...opts,
+    headers: { 'Content-Type':'application/json', Authorization:`Bearer ${TOKEN}`, ...(opts.headers||{}) }
+  });
+}
+
+// ── Stats ─────────────────────────────────────────────────────────────────────
+async function loadStats() {
+  try {
+    const res  = await apiFetch('/stats');
+    const data = await res.json();
+    if (!data.success) return;
+    const s = data.stats;
+    document.getElementById('stat-total').textContent     = s.totalOrders;
+    document.getElementById('stat-pending').textContent   = s.pendingOrders;
+    document.getElementById('stat-delivered').textContent = s.deliveredOrders;
+    document.getElementById('stat-revenue').textContent   = fmt(s.totalRevenue);
+    document.getElementById('stat-messages').textContent  = s.unreadMessages;
+
+    // Sidebar badges
+    const pc = document.getElementById('pending-count');
+    if (s.pendingOrders > 0) { pc.textContent = s.pendingOrders; pc.style.display = ''; }
+    const uc = document.getElementById('unread-count');
+    if (s.unreadMessages > 0) { uc.textContent = s.unreadMessages; uc.style.display = ''; }
+
+    // Recent orders table
+    const tbody = document.getElementById('recent-orders-body');
+    tbody.innerHTML = (data.recentOrders || []).map(o => `
+      <tr style="cursor:pointer;" onclick="openOrder('${o._id}')">
+        <td style="color:#d4a373;font-weight:700;">${o.orderNumber}</td>
+        <td>${o.customerName}</td>
+        <td>${fmt(o.total)}</td>
+        <td>${statusBadge(o.status)}</td>
+        <td style="color:#8a8078;">${fmtDate(o.createdAt)}</td>
+      </tr>`).join('');
+  } catch(e) { console.error(e); }
+}
+
+// ── Orders ────────────────────────────────────────────────────────────────────
+async function loadOrders() {
+  const status = document.getElementById('order-filter').value;
+  const qs = status ? `?status=${status}` : '';
+  try {
+    const res  = await apiFetch(`/orders${qs}`);
+    const data = await res.json();
+    const tbody  = document.getElementById('orders-body');
+    const emptyEl = document.getElementById('orders-empty');
+    if (!data.success || !data.orders.length) {
+      tbody.innerHTML = '';
+      emptyEl.style.display = '';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    tbody.innerHTML = data.orders.map(o => `
+      <tr>
+        <td style="color:#d4a373;font-weight:700;cursor:pointer;" onclick="openOrder('${o._id}')">${o.orderNumber}</td>
+        <td>${o.customerName}</td>
+        <td>${o.customerPhone}</td>
+        <td>${o.items.length} item${o.items.length!==1?'s':''}</td>
+        <td>${fmt(o.total)}</td>
+        <td>${statusBadge(o.status)}</td>
+        <td style="color:#8a8078;white-space:nowrap;">${fmtDate(o.createdAt)}</td>
+        <td>
+          <select onchange="updateStatus('${o._id}',this.value)"
+            style="padding:5px 10px;border-radius:8px;font-size:.75rem;width:auto;">
+            ${['pending','confirmed','preparing','out_for_delivery','delivered','cancelled']
+               .map(s => `<option value="${s}" ${o.status===s?'selected':''}>${s.replace(/_/g,' ')}</option>`).join('')}
+          </select>
+        </td>
+      </tr>`).join('');
+  } catch(e) { console.error(e); }
+}
+
+async function updateStatus(id, status) {
+  try {
+    await apiFetch(`/orders/${id}/status`, {
+      method:'PATCH', body: JSON.stringify({ status })
+    });
+    loadStats();
+    loadOrders();
+  } catch(e) { console.error(e); }
+}
+
+async function openOrder(id) {
+  try {
+    const res  = await apiFetch(`/orders/${id}`);
+    const data = await res.json();
+    if (!data.success) return;
+    const o = data.order;
+    document.getElementById('modal-content').innerHTML = `
+      <h2 style="font-size:1.2rem;font-weight:900;color:#d4a373;margin-bottom:1rem;">${o.orderNumber}</h2>
+      <table style="margin-bottom:1rem;">
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Customer</td><td style="font-weight:700;">${o.customerName}</td></tr>
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Phone</td><td>${o.customerPhone}</td></tr>
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Address</td><td>${o.deliveryAddress}</td></tr>
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Note</td><td>${o.note||'—'}</td></tr>
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Status</td><td>${statusBadge(o.status)}</td></tr>
+        <tr><td style="color:#8a8078;padding:4px 8px 4px 0;">Date</td><td>${fmtDate(o.createdAt)}</td></tr>
+      </table>
+      <hr style="border-color:#3d3630;margin:.75rem 0;">
+      ${o.items.map(i=>`
+        <div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid #2a2824;">
+          <span>${i.name} × ${i.qty}</span>
+          <span style="color:#d4a373;font-weight:700;">${fmt(i.price*i.qty)}</span>
+        </div>`).join('')}
+      <div style="text-align:right;margin-top:.75rem;font-size:.9rem;">
+        <div style="color:#8a8078;">Subtotal: ${fmt(o.subtotal)}</div>
+        <div style="color:#8a8078;">Delivery: ${fmt(o.deliveryFee)}</div>
+        <div style="font-weight:900;font-size:1.1rem;color:#d4a373;margin-top:.35rem;">Total: ${fmt(o.total)}</div>
+      </div>`;
+    document.getElementById('order-modal').style.display = 'flex';
+  } catch(e) { console.error(e); }
+}
+
+function closeModal() { document.getElementById('order-modal').style.display = 'none'; }
+
+// ── Messages ──────────────────────────────────────────────────────────────────
+async function loadMessages() {
+  try {
+    const res  = await apiFetch('/contact');
+    const data = await res.json();
+    const list  = document.getElementById('messages-list');
+    const emptyEl = document.getElementById('messages-empty');
+    if (!data.success || !data.messages.length) {
+      list.innerHTML = '';
+      emptyEl.style.display = '';
+      return;
+    }
+    emptyEl.style.display = 'none';
+    list.innerHTML = data.messages.map(m => `
+      <div class="card" style="${!m.read?'border-color:rgba(212,163,115,.4);':''}"
+           id="msg-${m._id}">
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;">
+          <div>
+            <p style="font-weight:700;">${m.name}
+              ${!m.read?'<span class="badge badge-pending" style="margin-left:6px;">New</span>':''}
+            </p>
+            <p style="color:#8a8078;font-size:.8rem;">${m.email} · ${fmtDate(m.createdAt)}</p>
+            <p style="color:#d4a373;font-size:.8rem;margin-top:2px;">${m.subject||'General enquiry'}</p>
+          </div>
+          <div style="display:flex;gap:.5rem;">
+            ${!m.read?`<button class="btn btn-ghost" onclick="markRead('${m._id}')">Mark read</button>`:''}
+            <button class="btn btn-danger" onclick="deleteMessage('${m._id}')">Delete</button>
+          </div>
+        </div>
+        <p style="margin-top:.75rem;color:#cbc2b8;font-size:.875rem;line-height:1.6;">${m.message}</p>
+      </div>`).join('');
+  } catch(e) { console.error(e); }
+}
+
+async function markRead(id) {
+  await apiFetch(`/contact/${id}/read`, { method:'PATCH' });
+  loadStats(); loadMessages();
+}
+
+async function deleteMessage(id) {
+  if (!confirm('Delete this message?')) return;
+  await apiFetch(`/contact/${id}`, { method:'DELETE' });
+  loadMessages();
+}
+
+// ── Boot ──────────────────────────────────────────────────────────────────────
+document.getElementById('login-password').addEventListener('keydown', e => {
+  if (e.key === 'Enter') login();
+});
+checkAuth();
+</script>
+</body>
+</html>
