@@ -1,5 +1,5 @@
 /**
- * app.js — Sarvoraa core engine
+ * app.js — KTU_FOODS core engine
  * Handles: cart (localStorage), toast notifications,
  *          contact form validation, shared nav cart badge
  */

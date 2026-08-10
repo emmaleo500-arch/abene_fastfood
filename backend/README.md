@@ -1,6 +1,6 @@
-# Sarvoraa Backend
+# KTU_FOODS Backend
 
-Node.js / Express / MongoDB backend for the Sarvoraa fastfood website.  
+Node.js / Express / MongoDB backend for the KTU_FOODS fastfood website.  
 Handles orders, contact messages, admin authentication, and email notifications.
 
 ---
@@ -194,7 +194,7 @@ Server runs at **http://localhost:5000**
 
 ```
 GET /api/health
-→ { "success": true, "message": "Sarvoraa API is running 🚀" }
+→ { "success": true, "message": "Sarvoraa API is running " }
 ```
 
 ---
